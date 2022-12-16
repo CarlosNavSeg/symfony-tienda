@@ -1,0 +1,17 @@
+<div class="container_book-container">
+    <div class="row">
+    {% for book in books %}
+    <div class="col-4">
+        <div class="book-image">
+            <img class="img-thumbnail" src="{{ asset('img/' ~ book.photo) }}" alt="no book image"/>
+        </div>
+        <div class="book-info">
+            <h5>{{book.title}}</h5>
+            <p class="book-author">{{book.author}}</p>
+            <p class="book-pHouse">{{book.publishingHouse}}</p>
+            <p><a class="btn btn-primary py-2 px-3 open-info-product" data-id="{{book.id}}">{{book.price}}<i class="bi bi-eye"></i></a></p>
+  
+        </div>
+    </div>
+    {% endfor %}
+</div>

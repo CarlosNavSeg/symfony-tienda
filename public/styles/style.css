@@ -12,3 +12,26 @@ nav a.active {
 h1 { 
     text-align: center;
 }
+
+.book-info {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.book-image {
+    text-align: center;
+    align-items: center;
+}
+
+.container_book-container {
+    margin: 2rem 2rem 2rem 2rem
+}
+
+.carousel-caption {
+    color: rgb(165, 165, 253);
+    font-size: large;
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+    background-size: auto;
+    background-blend-mode: color-burn;
+}

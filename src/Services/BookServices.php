@@ -1,10 +1,10 @@
 <?php
-namespace App\Service;
+namespace App\Services;
    
 use App\Entity\Book;
 use Doctrine\Persistence\ManagerRegistry;
    
-class ProductsService{
+class BookServices{
     private $doctrine;
    
     public function __construct(ManagerRegistry $doctrine)

@@ -2,17 +2,17 @@
 
 namespace App\Controller;
 
-use App\Service\ProductsService;
+use App\Services\BookServices;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProductsController extends AbstractController
 {
-    #[Route('/product', name: 'product')]
-    public function index(ProductsService $productsService): Response
+    #[Route('/product', name: 'app_products')]
+    public function index(BookServices $bookService): Response
     {
-    $products = $productsService->getProducts();
-    return $this->render('product/product.html.twig', compact('products'));
+    $books = $bookService->getProducts();
+    return $this->render('products/products.html.twig', compact('books'));
     }
 }
