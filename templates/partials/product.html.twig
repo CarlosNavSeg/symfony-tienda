@@ -9,8 +9,9 @@
             <h5>{{book.title}}</h5>
             <p class="book-author">{{book.author}}</p>
             <p class="book-pHouse">{{book.publishingHouse}}</p>
-            <p><a class="btn btn-primary py-2 px-3 open-info-product" data-id="{{book.id}}">{{book.price}}<i class="bi bi-eye"></i></a></p>
-  
+            <p><a class="open-info-book btn btn-primary" id="{{book.id}}" data-toggle="modal" data-target="#infobook">
+            {{book.price}}€</a></p>
+           {{ include('partials/_infoBook.html.twig') }}
         </div>
     </div>
     {% endfor %}

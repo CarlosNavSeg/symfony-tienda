@@ -1,36 +1,19 @@
-<div id="infobook" class="modal" tabindex="-1" role="dialog">
+<div class="modal fade" id="infobook" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">LostPages</h5>
-        <button type="button" class="close closeInfoBook" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+        <div class="book-image">
+        <img class="img-thumbnail" src="{{ asset('img/' ~ book.photo) }}">
+        </div>
+        <h5 class="modal-title" id="exampleModalLabel">{{book.title}}</h5>
       </div>
       <div class="modal-body">
-        <div class="border-start border-5 border-primary ps-5 mb-5" style="max-width: 600px;">
-                <h4 id='bookName' class="text-primary text-uppercase">{{book.title}}</h4>
-            </div>
-        <img id='bookImage' class="img-fluid mb-4" src={{ asset('img/' ~ {{book.photo}}) }}>
-         <div class="text-center bg-primary p-4 mb-2">
-            <h1 class="display-4 text-white mb-0">
-                  <span id='bookPrice'>{{book.price}}</span><small class="align-top" style="font-size: 22px; line-height: 45px;">€</small>
-            </h1>
-        </div>
+        <p>{{book.author}}</p>
+        <p>{{book.publishingHouse}}</p>
       </div>
-      <p>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        Show book info
-    </button>
-    </p>
-    <div class="collapse" id="collapseExample">
-      <div class="card card-body">
-        <p class="book-author">{{book.author}}</p>
-        <p class="book-pHouse">{{book.publishingHouse}}</p>
-      </div>
-    </div>
       <div class="modal-footer">
-       <button type="button" class="btn btn-secondary closeInfobook" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <span><a href="#" class="btn btn-primary">{{book.price}}</a></span>
       </div>
     </div>
   </div>
