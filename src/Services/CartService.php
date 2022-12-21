@@ -16,6 +16,7 @@ class CartService{
     public function getCart(): array {
         return $this->getSession()->get(self::KEY, []);
     }
+    
     public function add(int $id, int $quantity = 1){
         //https://symfony.com/doc/current/session.html
         $cart = $this->getCart();
@@ -23,6 +24,23 @@ class CartService{
         if (!array_key_exists($id, $cart))
             $cart[$id] = $quantity;
         $this->getSession()->set(self::KEY, $cart); 
+
+    }
+
+    public function update(int $id, int $quantity) {
+        $cart = $this->getCart();
+
+        if(!array_key_exists($id, $cart))
+            $cart[$id] = $quantity;
+        $this->getSession()->set(self::KEY, $cart);
+    }
+
+    public function delete(int $id) {
+        $cart = $this->getCart();
+
+        if(!array_key_exists($id, $cart))
+            unset($cart[$id]);
+        $this->getSession()->set(self::KEY, $cart);
     }
 }
 ?>
