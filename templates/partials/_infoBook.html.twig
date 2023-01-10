@@ -3,13 +3,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <div class="book-image">
-        <img class="img-thumbnail" src="{{ asset('img/' ~ book.photo) }}">
+        <img class="img-thumbnail" id="bookPhoto" src="{{ asset('img/' ~ book.photo) }}" alt="no book image">
         </div>
-        <h5 class="modal-title" id="exampleModalLabel">{{book.title}}</h5>
+        <h5 class="modal-title" id="bookTitle">{{book.title}}</h5>
       </div>
       <div class="modal-body">
-        <p>{{book.author}}</p>
-        <p>{{book.publishingHouse}}</p>
+        <p id="bookAuthor">{{book.author}}</p>
+        <p id="bookpublishingHouse">{{book.publishingHouse}}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
