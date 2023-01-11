@@ -64,18 +64,6 @@ class BookRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-    public function getFromCart(CartService $cart): array
-    {
-        if (empty($cart->getCart())) {
-            return [];
-        }
-        $ids = implode(',', array_keys($cart->getCart()));
-    
-        return $this->createQueryBuilder('p')
-            ->andWhere("p.id in ($ids)")
-            ->getQuery()
-            ->getResult();
-    }
 
 
 }

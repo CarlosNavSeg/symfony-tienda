@@ -1,15 +1,31 @@
 <?php
-namespace App\Services;
+
+namespace App\Storage;
 
 use App\Entity\Order;
 use App\Repository\OrderRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class CartService{
+class CartSessionStorage
+{
+    /**
+     * The request stack.
+     *
+     * @var RequestStack
+     */
     private $requestStack;
+
+    /**
+     * The cart repository.
+     *
+     * @var OrderRepository
+     */
     private $cartRepository;
 
+    /**
+     * @var string
+     */
     const CART_KEY_NAME = 'cart_id';
 
     /**
@@ -62,4 +78,3 @@ class CartService{
         return $this->requestStack->getSession();
     }
 }
-?>

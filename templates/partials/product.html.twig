@@ -11,8 +11,9 @@
             <p class="book-author">{{book.author}}</p>
             <p class="book-pHouse">{{book.publishingHouse}}</p>
             <p><a class="open-info-book btn btn-primary" id="{{book.id}}" data-toggle="modal" data-target="#infobook">
-            {{book.price}}€</a></p>
+            {{book.price}}€</a> <a class="open-cart-items btn btn-primary" id="{{book.id}}"><i class="fa-solid fa-cart-shopping"></i></a></p>
            {{ include('partials/_infoBook.html.twig') }}
+            {% include "partials/_cartModal.html.twig" %}
         </div>
     </div>
     {% endfor %}

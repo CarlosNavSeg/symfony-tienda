@@ -13,8 +13,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <span><a class="open-cart-items btn btn-primary" id="{{book.id}}" data-toggle="modal" data-target="#cart-modal">{{book.price}}</a></span>
-        {% include "partials/_cartModal.html.twig" %}
+        <span><a class="btn btn-primary" href="/cart/add/{{book.id}}">{{book.price}}</a></span>
       </div>
     </div>
   </div>

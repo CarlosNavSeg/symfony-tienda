@@ -28,6 +28,12 @@ class Book
     #[ORM\Column(length: 255)]
     private ?string $photo = null;
 
+    #[ORM\ManyToOne(inversedBy: 'items')]
+    private ?Order $ordered = null;
+
+    #[ORM\ManyToOne(inversedBy: 'book')]
+    private ?OrderItem $orderedItem = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +95,30 @@ class Book
     public function setPhoto(string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getOrdered(): ?Order
+    {
+        return $this->ordered;
+    }
+
+    public function setOrdered(?Order $ordered): self
+    {
+        $this->ordered = $ordered;
+
+        return $this;
+    }
+
+    public function getOrderedItem(): ?OrderItem
+    {
+        return $this->orderedItem;
+    }
+
+    public function setOrderedItem(?OrderItem $orderedItem): self
+    {
+        $this->orderedItem = $orderedItem;
 
         return $this;
     }

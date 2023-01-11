@@ -1,4 +1,4 @@
-<div class="modal fade" id="cart-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="cartmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-header">
@@ -11,17 +11,18 @@
         <div id='data-container'>
           <div class="row">
             <div class="col-md-3">
-                <img class='img-thumbnail img-responsive' style='max-width:128px' src="{{ asset('img/' ~ book.photo) }}">
+                <img class='img-thumbnail img-responsive' id="bookPhoto" style='max-width:128px' src="{{ asset('img/' ~ book.photo) }}">
             </div>
             <div class="col-md-9">
-                <h4 class='name'></h4>
-                <input type='number' min='1' id='quantity' value=1><button class='update' class='btn'>Update</button>
+                <h4 class='name' id="bookTitle"></h4>
+                <p id="bookPrice"> </p>
+                <input type='number' min='1' id='quantity' value="1"><button class='update' href="/cart/update/{{book.id}}/" class='btn'>Update</button>
             </div>
           </div>
           <hr>
           <div class="row">
             <div class="col-md-4" >
-              <a href="/cart/add/ ~ {{book.id}} " class="btn btn-primary">View cart</a>
+              <a href="/cart/" class="btn btn-primary">View cart</a>
             </div>
           </div>
         </div>
