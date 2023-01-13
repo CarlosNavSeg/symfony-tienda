@@ -22,8 +22,7 @@
                         <img src="https://via.placeholder.com/200x150" width="64" alt="Product image">
                     </div>
                     <div class="flex-fill mr-2">
-                        <h5 class="mt-0 mb-0">{{ item.vars.data.product.name }}</h5>
-                        <small>{{ item.vars.data.product.description[:50] }}...</small>
+                        <h5 class="mt-0 mb-0">{{ item.vars.data.book.title }}</h5>
                         <div class="form-inline mt-2">
                             <div class="form-group mb-0 mr-2">
                                 {{ form_widget(item.quantity, {
@@ -39,7 +38,7 @@
                         </div>
                     </div>
                     <div class="flex-fill mr-2 text-right">
-                        <b>{{ item.vars.data.product.price }} €</b>
+                        <b>{{ item.vars.data.book.price }} €</b>
                     </div>
                 </li>
             {% endfor %}

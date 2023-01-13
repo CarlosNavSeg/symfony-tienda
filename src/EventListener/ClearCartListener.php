@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\EventListener;
+namespace App\EventListener;
 
 use App\Entity\Order;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

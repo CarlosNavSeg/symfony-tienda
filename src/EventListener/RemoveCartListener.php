@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Form\EventListener;
+namespace App\EventListener;
 
 use App\Entity\Order;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormEvents;
  * Class RemoveCartItemListener
  * @package App\Form\EventListener
  */
-class RemoveCartItemListener implements EventSubscriberInterface
+class RemoveCartListener implements EventSubscriberInterface
 {
     /**
      * @inheritDoc
@@ -38,7 +38,7 @@ class RemoveCartItemListener implements EventSubscriberInterface
         // Removes items from the cart
         foreach ($form->get('items')->all() as $child) {
             if ($child->get('remove')->isClicked()) {
-                $cart->removeItem($child->getData());
+                $cart->removeItems($child->getData());
                 break;
             }
         }

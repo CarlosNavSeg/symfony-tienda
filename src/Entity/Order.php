@@ -18,14 +18,18 @@ class Order
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?float $orderPrice = null;
 
     #[ORM\Column(length: 255)]
     private ?string $status = self::STATUS_CART;
 
-    #[ORM\OneToMany(mappedBy: 'orderItems', targetEntity: OrderItem::class)]
+    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'orderRef',  cascade:['persist', 'remove'])]
     private Collection $orderItems;
+
+    #[ORM\Column(type:"datetime")]
+    private $createdAt;
+
+    #[ORM\Column(type:"datetime")]
+    private $updatedAt;
 
     public function __construct()
     {
@@ -38,18 +42,6 @@ class Order
     }
 
 
-    public function getOrderPrice(): ?float
-    {
-        return $this->orderPrice;
-    }
-
-    public function setOrderPrice(float $orderPrice): self
-    {
-        $this->orderPrice = $orderPrice;
-
-        return $this;
-    }
-
     public function getStatus(): ?string
     {
         return $this->status;
@@ -58,6 +50,30 @@ class Order
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -84,15 +100,6 @@ class Order
 
     $this->orderItems[] = $item;
     $item->setOrderRef($this);
-
-    return $this;
-    }
-
-    public function removeItems(): self
-    {
-    foreach ($this->getOrderItems() as $item) {
-        $this->removeBook($item);
-    }
 
     return $this;
     }

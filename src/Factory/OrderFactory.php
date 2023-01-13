@@ -6,33 +6,32 @@ use App\Entity\Book;
 use App\Entity\Order;
 use App\Entity\OrderItem;
 
+/**
+ * Class OrderFactory.
+ */
 class OrderFactory
 {
     /**
      * Creates an order.
-     *
-     * @return Order
      */
     public function create(): Order
     {
         $order = new Order();
         $order
             ->setStatus(Order::STATUS_CART)
-        ;
+            ->setCreatedAt(new \DateTime())
+            ->setUpdatedAt(new \DateTime());
+
         return $order;
     }
 
     /**
      * Creates an item for a product.
-     *
-     * @param Book $book
-     *
-     * @return OrderItem
      */
-    public function createItem(Book $book): OrderItem
+    public function createItem(Book $product): OrderItem
     {
         $item = new OrderItem();
-        $item->addBook($book);
+        $item->addBook($product);
         $item->setQuantity(1);
 
         return $item;

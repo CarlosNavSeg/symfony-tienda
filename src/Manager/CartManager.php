@@ -3,14 +3,10 @@
 namespace App\Manager;
 
 use App\Entity\Order;
+use App\Factory\OrderFactory;
 use App\Storage\CartSessionStorage;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Factory\OrderFactory;
 
-/**
- * Class CartManager
- * @package App\Manager
- */
 class CartManager
 {
     /**
@@ -30,9 +26,6 @@ class CartManager
 
     /**
      * CartManager constructor.
-     *
-     * @param CartSessionStorage $cartStorage
-     * @param OrderFactory $orderFactory
      */
     public function __construct(
         CartSessionStorage $cartStorage,
@@ -46,8 +39,6 @@ class CartManager
 
     /**
      * Gets the current cart.
-     * 
-     * @return Order
      */
     public function getCurrentCart(): Order
     {
@@ -60,6 +51,9 @@ class CartManager
         return $cart;
     }
 
+    /**
+     * Persists the cart in database and session.
+     */
     public function save(Order $cart): void
     {
         // Persist in database
@@ -69,4 +63,3 @@ class CartManager
         $this->cartSessionStorage->setCart($cart);
     }
 }
-

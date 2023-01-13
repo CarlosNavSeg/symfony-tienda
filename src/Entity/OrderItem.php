@@ -15,59 +15,35 @@ class OrderItem
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToMany(mappedBy: 'orderedItem', targetEntity: Book::class)]
-    private Collection $book;
-
+    #[ORM\ManyToOne(targetEntity: Book::class)]
+    #[ORM\JoinColumn(nullable: false)]
+    private $book;
     
-    #[ORM\ManyToOne(targetEntity: "Order", inversedBy: "orderItems")]
+    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: "orderItems")]
     #[ORM\JoinColumn(nullable: false)]
     private $orderRef;
 
     #[ORM\Column]
     private ?int $quantity = null;
 
-    #[ORM\ManyToOne(inversedBy: 'orderItems')]
-    private ?Order $orderItems = null;
-
-    public function __construct()
-    {
-        $this->book = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, Book>
-     */
-    public function getBook(): Collection
+    public function getBook(): ?Book
     {
         return $this->book;
     }
 
-    public function addBook(Book $book): self
+    public function setBook(?Book $Book): self
     {
-        if (!$this->book->contains($book)) {
-            $this->book->add($book);
-            $book->setOrderedItem($this);
-        }
+        $this->book = $Book;
 
         return $this;
     }
 
-    public function removeBook(Book $book): self
-    {
-        if ($this->book->removeElement($book)) {
-            // set the owning side to null (unless already changed)
-            if ($book->getOrderedItem() === $this) {
-                $book->setOrderedItem(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getQuantity(): ?int
     {
@@ -81,20 +57,9 @@ class OrderItem
         return $this;
     }
 
-    public function getOrderItems(): ?Order
-    {
-        return $this->orderItems;
-    }
-
-    public function setOrderItems(?Order $orderItems): self
-    {
-        $this->orderItems = $orderItems;
-
-        return $this;
-    }
     public function equals(OrderItem $item): bool
     {
-    return $this->getOrderItems()->getId() === $item->getOrderItems()->getId();
+        return $this->getBook()->getId() === $item->getBook()->getId();
     }
 
     public function getOrderRef(): ?Order

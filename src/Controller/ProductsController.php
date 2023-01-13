@@ -3,10 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Form\AddToCartType;
 use App\Manager\CartManager;
 use App\Services\BookServices;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,7 +20,7 @@ class ProductsController extends AbstractController
     return $this->render('products/products.html.twig', compact('books'));
     }
     
-    #[Route('/book/{id}')]
+    #[Route('/book/{id}', name: 'product.detail')]
     public function detail(Book $product, Request $request, CartManager $cartManager)
     {
         $form = $this->createForm(AddToCartType::class);
@@ -28,7 +29,7 @@ class ProductsController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $item = $form->getData();
-            $item->setProduct($product);
+            $item->setBook($product);
 
             $cart = $cartManager->getCurrentCart();
             $cart
@@ -39,7 +40,7 @@ class ProductsController extends AbstractController
             return $this->redirectToRoute('product.detail', ['id' => $product->getId()]);
         }
 
-        return $this->render('product/detail.html.twig', [
+        return $this->render('products/details.html.twig', [
             'product' => $product,
             'form' => $form->createView()
         ]);
