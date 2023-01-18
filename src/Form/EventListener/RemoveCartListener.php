@@ -1,13 +1,17 @@
 <?php
 
-namespace App\EventListener;
+namespace App\Form\EventListener;
 
 use App\Entity\Order;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class ClearCartListener implements EventSubscriberInterface
+/**
+ * Class RemoveCartItemListener
+ * @package App\Form\EventListener
+ */
+class RemoveCartListener implements EventSubscriberInterface
 {
     /**
      * @inheritDoc
@@ -18,7 +22,7 @@ class ClearCartListener implements EventSubscriberInterface
     }
 
     /**
-     * Removes all items from the cart when the clear button is clicked.
+     * Removes items from the cart based on the data sent from the user.
      *
      * @param FormEvent $event
      */
@@ -31,12 +35,15 @@ class ClearCartListener implements EventSubscriberInterface
             return;
         }
 
-        // Is the clear button clicked?
-        if (!$form->get('clear')->isClicked()) {
-            return;
+        // Removes items from the cart
+        foreach ($form->get('orderItems')->all() as $child) {
+            if ($child->get('remove')->isClicked()) {
+                $cart->removeItems($child->getData());
+                break;
+            }
         }
 
+
         // Clears the cart
-        $cart->removeItems();
     }
 }

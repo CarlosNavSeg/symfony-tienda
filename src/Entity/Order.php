@@ -22,7 +22,7 @@ class Order
     #[ORM\Column(length: 255)]
     private ?string $status = self::STATUS_CART;
 
-    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'orderRef',  cascade:['persist', 'remove'])]
+    #[ORM\OneToMany(targetEntity: OrderItem::class, mappedBy: 'orderRef',  cascade:['persist', 'remove'], orphanRemoval:true)]
     private Collection $orderItems;
 
     #[ORM\Column(type:"datetime")]
@@ -102,6 +102,32 @@ class Order
     $item->setOrderRef($this);
 
     return $this;
+    }
+
+    public function removeItem(OrderItem $item): self
+    {
+        if ($this->orderItems->removeElement($item)) {
+            // set the owning side to null (unless already changed)
+            if ($item->getOrderRef() === $this) {
+                $item->setOrderRef(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Removes all items from the order.
+     *
+     * @return $this
+     */
+    public function removeItems(): self
+    {
+        foreach ($this->getOrderItems() as $item) {
+            $this->removeItem($item);
+        }
+
+        return $this;
     }
 
     public function getTotal(): float

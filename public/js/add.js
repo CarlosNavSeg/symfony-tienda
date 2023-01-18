@@ -5,6 +5,8 @@
       let id = $( this ).attr('id');
       const href = `/api/show/${id}`;
       $.get( href, function(data) {
+        $( infoBook ).find( "#bookId" ).attr('href', "book/" + data.id)
+        $( infoBook ).find( "#bookId" ).text(data.price)
         $( infoBook ).find( "#bookTitle" ).text(data.title);
         $( infoBook ).find( "#bookPrice" ).text(data.price);
         $( infoBook ).find( "#bookAuthor" ).text(data.author);

@@ -16,24 +16,26 @@
             </div>
         </div>
         <ul class="list-group list-group-flush">
+            {{ form_start(form) }}
             {% for item in form.orderItems %}
                 <li class="list-group-item d-flex">
                     <div class="flex-fill mr-2">
-                        <img src="https://via.placeholder.com/200x150" width="64" alt="Product image">
+                        <img src="{{ asset('img/' ~ item.vars.data.book.photo) }}" width="64" alt="Product image">
                     </div>
                     <div class="flex-fill mr-2">
                         <h5 class="mt-0 mb-0">{{ item.vars.data.book.title }}</h5>
                         <div class="form-inline mt-2">
-                            <div class="form-group mb-0 mr-2">
-                                {{ form_widget(item.quantity, {
-                                    'attr': {
-                                        'class': 'form-control form-control-sm ' ~ (item.quantity.vars.valid ? '' : 'is-invalid')
-                                    }
-                                }) }}
-                                <div class="invalid-feedback">
-                                    {{ form_errors(item.quantity) }}
+                            <div class="form-inline mt-2">
+                                <div class="form-group mb-0 mr-2">
+                                    {{ form_widget(item.quantity, {
+                                        'attr': {
+                                            'class': 'form-control form-control-sm ' ~ (item.quantity.vars.valid ? '' : 'is-invalid')
+                                        }
+                                    }) }}
+                                    <div class="invalid-feedback">
+                                        {{ form_errors(item.quantity) }}
+                                    </div>
                                 </div>
-                            </div>
                             {{ form_widget(item.remove, {'attr': {'class': 'btn btn-dark btn-sm'}}) }}
                         </div>
                     </div>
@@ -42,6 +44,7 @@
                     </div>
                 </li>
             {% endfor %}
+            {{ form_end(form) }}
         </ul>
     </div>
     {{ form_end(form, {'render_rest': false}) }}
